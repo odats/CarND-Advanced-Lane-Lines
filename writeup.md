@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 [image3]: ./output_images/binary_combo_example.png "Binary Example"
 [image4]: ./output_images/warped_straight_lines.png "Warp Example"
 [image5]: ./output_images/color_fit_lines.png "Fit Visual"
-[image6]: ./output_images/example_output.ong "Output"
+[image6]: ./output_images/example_output.png "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -47,8 +47,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (The code for this step is contained in the [8] and [10] code cells of the IPython notebook located in "./examples/example.ipynb".  
-).  Here's an example of my output for this step.
+I used a combination of color and gradient thresholds to generate a binary image (The code for this step is contained in the [8] and [10] code cells of the IPython notebook located in "./examples/example.ipynb"). Here's an example of my output for this step.
 
 ![alt text][image3]
 
@@ -79,6 +78,7 @@ I verified that my perspective transform was working as expected by drawing the 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 `getLinesFit()` ([45] code cell) - to find initial lines.
+
 `getNextLinesFit()` ([45] code cell) - to find lines when you have initial starting points.
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
@@ -109,7 +109,7 @@ Here's a [link to my video result](./test_videos/project_video_result.mp4)
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further. 
 
-The next distortion can break lines identification:
+The next distortions can break lines identification:
 1) When the road is damaged
 2) Specific shadows
 3) Traffic jam with a lot of cars
