@@ -47,7 +47,15 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (The code for this step is contained in the [8] and [10] code cells of the IPython notebook located in "./examples/example.ipynb"). Here's an example of my output for this step.
+I used a combination of color and gradient thresholds to generate a binary image (The code for this step is contained in the [8] and [10] code cells of the IPython notebook located in "./examples/example.ipynb").
+
+I have Grayscaled image. Then I used Sobel to threshold x gradient.
+
+In parallel, I have converted image to HLS color space and separated the S channel. Then I made a threshold for S color channel.
+
+As a final step I combined these two binary thresholds.
+
+Here's an example of my output for this step.
 
 ![alt text][image3]
 
@@ -81,13 +89,22 @@ I verified that my perspective transform was working as expected by drawing the 
 
 `getNextLinesFit()` ([45] code cell) - to find lines when you have initial starting points.
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I have used sliding window technick to find lines. As a first step I took a histogram of the bottom half of the image. I have selected 2 picks as a starting point for lines. After 9 iterations I had a 2 vectors of pixels. I have used `np.polyfit` to fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 I did this in the [13] and [14] code cells of the IPython notebook located in "./examples/example.ipynb".
+
+My input parameter was second order polynomial curve. Here is the formula to calculate curvature in radians: `left_curverad = ((1 + (2*left_fit[0]*y_eval + left_fit[1])**2)**1.5) / np.absolute(2*left_fit[0])` As a next step I have converted this value from radians to meters. I used the next magic numbers: the lane is about 30 meters long and 3.7 meters wide. 
+
+To calculate car position 
+- `np.polyval` to find starting y cordinates of left and right lines
+- find distance between lines
+- find center of the line
+- get relation between image center and image center
+- convert to meters
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
